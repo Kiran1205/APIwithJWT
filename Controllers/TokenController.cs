@@ -93,7 +93,8 @@ namespace MAPICore.Controllers
                 return Ok(new
                 {
                     token = token,
-                    name = user.UserName
+                    name = user.UserName,
+                    id = user.Id
                 });
             }
             catch (Exception e)
@@ -116,7 +117,7 @@ namespace MAPICore.Controllers
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
                 _configuration["Jwt:Issuer"],
                 claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(10),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
